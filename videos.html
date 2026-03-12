@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Video Gallery</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #111;
+        color: #eee;
+        margin: 20px;
+    }
+    h1 { margin-bottom: 20px; }
+
+    .controls {
+        background: #222;
+        padding: 15px;
+        border-radius: 6px;
+        margin-bottom: 20px;
+    }
+
+    select {
+        padding: 6px;
+        border-radius: 4px;
+        background: #000;
+        color: #eee;
+        border: 1px solid #444;
+        margin-right: 10px;
+        margin-top: 10px;
+    }
+
+    .video-item {
+        background: #222;
+        padding: 15px;
+        border-radius: 6px;
+        margin-bottom: 20px;
+    }
+
+    video {
+        width: 100%;
+        max-height: 360px;
+        border-radius: 6px;
+    }
+    button {
+        background-color: #000;
+    }
+</style>
+</head>
+<body>
+
+<h1>Video Gallery</h1>
+<nav>
+        <button>
+            <a href="index.html">Home</a> |
+            <a href="about.html">About</a> |
+            <a href="Game/index.html" target="_blank" rel="noopener noreferrer">Game</a> |
+            <a href="social.html">Socals</a> |
+            <a href="contact.html">Contact & Donations</a>|
+            <a href="videos.html">Videos Gallery</a> |
+        </button>
+    </nav>
+<!-- FILTERS -->
+<div class="controls">
+    <label>Sort by date:</label>
+    <select id="sortOrder" onchange="renderVideos()">
+        <option value="newest">Newest First</option>
+        <option value="oldest">Oldest First</option>
+    </select>
+
+    <label>Filter by year:</label>
+    <select id="yearFilter" onchange="renderVideos()">
+        <option value="all">All Years</option>
+    </select>
+
+    <label>Filter by type:</label>
+    <select id="typeFilter" onchange="renderVideos()">
+        <option value="all">All Types</option>
+    </select>
+</div>
+
+<div id="videoList"></div>
+
+<script>
+     
+/*
+    ADD YOUR VIDEOS HERE
+    ---------------------
+    type can be: "Long Jump", "Triple Jump", "Workout", etc.
+*/
+
+const videos = [
+    { title: "Long Jump ", file: "IMG_8144.mov", date: "2026-01-11", type: "Long Jump" },
+    { title: "Triple Jump ", file: "2036750241325332000.mov", date: "2025-12-06", type: "Triple Jump" },
+    { title: "Long Jump Practice 2", file: "videos/lj2.mp4", date: "2024-02-10", type: "Long Jump" }
+];
+
+// Build year dropdown
+function loadYears() {
+    const yearSelect = document.getElementById("yearFilter");
+    const years = [...new Set(videos.map(v => v.date.slice(0, 4)))].sort().reverse();
+
+    years.forEach(year => {
+        const option = document.createElement("option");
+        option.value = year;
+        option.textContent = year;
+        yearSelect.appendChild(option);
+    });
+}
+
+// Build type dropdown
+function loadTypes() {
+    const typeSelect = document.getElementById("typeFilter");
+    const types = [...new Set(videos.map(v => v.type))].sort();
+
+    types.forEach(type => {
+        const option = document.createElement("option");
+        option.value = type;
+        option.textContent = type;
+        typeSelect.appendChild(option);
+    });
+}
+
+function renderVideos() {
+    const list = document.getElementById("videoList");
+    const sortOrder = document.getElementById("sortOrder").value;
+    const yearFilter = document.getElementById("yearFilter").value;
+    const typeFilter = document.getElementById("typeFilter").value;
+
+    let filtered = videos.filter(v => {
+        const matchYear = yearFilter === "all" || v.date.startsWith(yearFilter);
+        const matchType = typeFilter === "all" || v.type === typeFilter;
+        return matchYear && matchType;
+    });
+
+    filtered.sort((a, b) => {
+        if (sortOrder === "newest") {
+            return new Date(b.date) - new Date(a.date);
+        } else {
+            return new Date(a.date) - new Date(b.date);
+        }
+    });
+
+    list.innerHTML = "";
+
+    filtered.forEach(v => {
+        const item = document.createElement("div");
+        item.className = "video-item";
+
+        item.innerHTML = `
+            <strong>${v.title}</strong><br>
+            <small>${v.date} — ${v.type}</small><br><br>
+            <video src="${v.file}" controls></video>
+        `;
+
+        list.appendChild(item);
+    });
+}
+
+loadYears();
+loadTypes();
+renderVideos();
+</script>
+
+</body>
+</html>
