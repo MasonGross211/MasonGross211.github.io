@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Gallery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+ 
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+        :root {
+            --bg:        #0a0a0a;
+            --surface:   #141414;
+            --surface2:  #1e1e1e;
+            --border:    #2a2a2a;
+            --accent:    #e8ff00;
+            --accent2:   #ff6b00;
+            --text:      #f0f0f0;
+            --muted:     #666;
+            --radius:    10px;
+        }
+ 
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            min-height: 100vh;
+        }
+ 
+        /* ── HEADER ── */
+        header {
+            padding: 48px 40px 32px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+ 
+        .header-title {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+ 
+        .header-label {
+            font-size: 11px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--accent);
+            font-weight: 500;
+        }
+ 
+        h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(56px, 8vw, 96px);
+            line-height: 0.9;
+            letter-spacing: 0.02em;
+            background: linear-gradient(135deg, #fff 40%, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+ 
+        /* ── NAV ── */
+        nav {
+            padding: 0 40px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            gap: 0;
+            overflow-x: auto;
+        }
+ 
+        nav a {
+            display: inline-block;
+            padding: 14px 20px;
+            font-size: 13px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.2s;
+            white-space: nowrap;
+            border-bottom: 2px solid transparent;
+        }
+ 
+        nav a:hover {
+            color: var(--text);
+            border-bottom-color: var(--accent);
+        }
+ 
+        /* ── CONTROLS ── */
+        .controls {
+            padding: 28px 40px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid var(--border);
+            background: var(--surface);
+        }
+ 
+        .controls-label {
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-right: 4px;
+        }
+ 
+        .pill-group {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+ 
+        .pill {
+            padding: 7px 16px;
+            border-radius: 99px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--muted);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.18s;
+            white-space: nowrap;
+        }
+ 
+        .pill:hover {
+            border-color: #555;
+            color: var(--text);
+        }
+ 
+        .pill.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #000;
+            font-weight: 500;
+        }
+ 
+        .divider-dot {
+            color: var(--border);
+            font-size: 20px;
+            line-height: 1;
+        }
+ 
+        /* ── STATS BAR ── */
+        .stats-bar {
+            padding: 14px 40px;
+            display: flex;
+            gap: 32px;
+            font-size: 12px;
+            letter-spacing: 0.05em;
+            color: var(--muted);
+            border-bottom: 1px solid var(--border);
+        }
+ 
+        .stats-bar span { color: var(--text); font-weight: 500; }
+ 
+        /* ── VIDEO GRID ── */
+        #videoList {
+            padding: 36px 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 24px;
+        }
+ 
+        .video-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: transform 0.2s, border-color 0.2s;
+            animation: fadeUp 0.3s ease both;
+        }
+ 
+        .video-card:hover {
+            transform: translateY(-3px);
+            border-color: #444;
+        }
+ 
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+ 
+        .video-card:nth-child(1)  { animation-delay: 0.00s; }
+        .video-card:nth-child(2)  { animation-delay: 0.04s; }
+        .video-card:nth-child(3)  { animation-delay: 0.08s; }
+        .video-card:nth-child(4)  { animation-delay: 0.12s; }
+        .video-card:nth-child(5)  { animation-delay: 0.16s; }
+        .video-card:nth-child(6)  { animation-delay: 0.20s; }
+ 
+        .video-embed {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 */
+            background: #000;
+        }
+ 
+        .video-embed iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+ 
+        /* placeholder for videos with no ID */
+        .video-embed .no-video {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: var(--surface2);
+            color: var(--muted);
+            font-size: 13px;
+        }
+ 
+        .no-video svg {
+            opacity: 0.3;
+        }
+ 
+        .video-meta {
+            padding: 16px 18px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+ 
+        .video-info { display: flex; flex-direction: column; gap: 4px; }
+ 
+        .video-type {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+ 
+        .type-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+        }
+ 
+        .long-jump  .type-dot { background: var(--accent); }
+        .triple-jump .type-dot { background: var(--accent2); }
+        .long-jump  .video-type { color: var(--accent); }
+        .triple-jump .video-type { color: var(--accent2); }
+ 
+        .video-date {
+            font-size: 12px;
+            color: var(--muted);
+        }
+ 
+        .video-num {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 32px;
+            color: var(--border);
+            line-height: 1;
+        }
+ 
+        /* ── EMPTY STATE ── */
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 80px 20px;
+            color: var(--muted);
+        }
+ 
+        .empty-state h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 40px;
+            letter-spacing: 0.05em;
+            color: var(--surface2);
+            margin-bottom: 8px;
+        }
+ 
+        /* ── RESPONSIVE ── */
+        @media (max-width: 600px) {
+            header, nav, .controls, .stats-bar, #videoList {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            #videoList {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+ 
+<header>
+    <div class="header-title">
+        <div class="header-label">Athletics · Track &amp; Field</div>
+        <h1>Video<br>Gallery</h1>
+    </div>
+</header>
+ 
+<nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="Game/index.html" target="_blank" rel="noopener noreferrer">Game</a>
+    <a href="social.html">Socials</a>
+    <a href="contact.html">Contact &amp; Donations</a>
+    <a href="videogallery.html" style="color:var(--text); border-bottom-color:var(--accent);">Videos</a>
+</nav>
+ 
+<div class="controls">
+    <span class="controls-label">Type</span>
+    <div class="pill-group" id="typeFilters">
+        <button class="pill active" data-type="All">All</button>
+        <button class="pill" data-type="Long Jump">Long Jump</button>
+        <button class="pill" data-type="Triple Jump">Triple Jump</button>
+    </div>
+ 
+    <span class="divider-dot">·</span>
+ 
+    <span class="controls-label">Date</span>
+    <div class="pill-group" id="dateFilters">
+        <button class="pill active" data-date="All">All</button>
+        <button class="pill" data-date="2025-04-03">Apr 3 '25</button>
+        <button class="pill" data-date="2025-04-04">Apr 4 '25</button>
+        <button class="pill" data-date="2025-04-10">Apr 10 '25</button>
+        <button class="pill" data-date="2025-04-22">Apr 22 '25</button>
+        <button class="pill" data-date="2025-04-28">Apr 28 '25</button>
+        <button class="pill" data-date="2025-06-09">Jun 9 '25</button>
+        <button class="pill" data-date="2025-12-06">Dec 6 '25</button>
+        <button class="pill" data-date="2025-12-27">Dec 27 '25</button>
+        <button class="pill" data-date="2026-01-11">Jan 11 '26</button>
+        <button class="pill" data-date="2026-02-12">Feb 12 '26</button>
+        <button class="pill" data-date="2026-02-23">Feb 23 '26</button>
+    </div>
+</div>
+ 
+<div class="stats-bar" id="statsBar">
+    <div>Showing <span id="countShown">—</span> videos</div>
+    <div>Long Jump: <span id="countLJ">—</span></div>
+    <div>Triple Jump: <span id="countTJ">—</span></div>
+</div>
+ 
+<div id="videoList"></div>
+ 
+<script>
+const videos = [
+    // LONG JUMP — 2025-04-03
+    { date: "2025-04-03", type: "Long Jump", youtubeId: "" },
+    { date: "2025-04-03", type: "Long Jump", youtubeId: "" },
+    { date: "2025-04-03", type: "Long Jump", youtubeId: "" },
+    { date: "2025-04-03", type: "Long Jump", youtubeId: "" },
+    { date: "2025-04-03", type: "Long Jump", youtubeId: "" },
+ 
+    // LONG JUMP — 2025-04-04
+    { date: "2025-04-04", type: "Long Jump", youtubeId: "dEq4uxFwoJs" },
+    { date: "2025-04-04", type: "Long Jump", youtubeId: "ZBt8JmfD-Jg" },
+    { date: "2025-04-04", type: "Long Jump", youtubeId: "" },
+ 
+    // LONG JUMP — 2025-04-10
+    { date: "2025-04-10", type: "Long Jump", youtubeId: "" },
+    { date: "2025-04-10", type: "Long Jump", youtubeId: "" },
+    { date: "2025-04-10", type: "Long Jump", youtubeId: "" },
+ 
+    // LONG JUMP — 2025-04-22
+    { date: "2025-04-22", type: "Long Jump", youtubeId: "" },
+    { date: "2025-04-22", type: "Long Jump", youtubeId: "" },
+    { date: "2025-04-22", type: "Long Jump", youtubeId: "" },
+ 
+    // LONG JUMP — 2025-04-28
+    { date: "2025-04-28", type: "Long Jump", youtubeId: "" },
+    { date: "2025-04-28", type: "Long Jump", youtubeId: "" },
+    { date: "2025-04-28", type: "Long Jump", youtubeId: "" },
+ 
+    // LONG JUMP — 2025-12-06
+    { date: "2025-12-06", type: "Long Jump", youtubeId: "heZlXoxcTNs" },
+    { date: "2025-12-06", type: "Long Jump", youtubeId: "gnV2QCX7KBE" },
+ 
+    // LONG JUMP — 2025-12-27
+    { date: "2025-12-27", type: "Long Jump", youtubeId: "xW3aLkQmLfo" },
+    { date: "2025-12-27", type: "Long Jump", youtubeId: "" },
+    { date: "2025-12-27", type: "Long Jump", youtubeId: "" },
+ 
+    // LONG JUMP — 2026-01-11
+    { date: "2026-01-11", type: "Long Jump", youtubeId: "tx37PJoVi6I" },
+    { date: "2026-01-11", type: "Long Jump", youtubeId: "2hlysjQxqrg" },
+    { date: "2026-01-11", type: "Long Jump", youtubeId: "" },
+    { date: "2026-01-11", type: "Long Jump", youtubeId: "" },
+ 
+    // LONG JUMP — 2026-02-12
+    { date: "2026-02-12", type: "Long Jump", youtubeId: "acfHdPkQYnQ" },
+    { date: "2026-02-12", type: "Long Jump", youtubeId: "EE5uGMFT4" },
+    { date: "2026-02-12", type: "Long Jump", youtubeId: "8P7ocEHWvw" },
+ 
+    // TRIPLE JUMP — 2025-06-09
+    { date: "2025-06-09", type: "Triple Jump", youtubeId: "VztoezXNUPg" },
+    { date: "2025-06-09", type: "Triple Jump", youtubeId: "" },
+    { date: "2025-06-09", type: "Triple Jump", youtubeId: "" },
+    { date: "2025-06-09", type: "Triple Jump", youtubeId: "" },
+ 
+    // TRIPLE JUMP — 2025-12-06
+    { date: "2025-12-06", type: "Triple Jump", youtubeId: "XM2h00rUjfA" },
+    { date: "2025-12-06", type: "Triple Jump", youtubeId: "3OUoRNUG6Qg" },
+    { date: "2025-12-06", type: "Triple Jump", youtubeId: "" },
+ 
+    // TRIPLE JUMP — 2025-12-27
+    { date: "2025-12-27", type: "Triple Jump", youtubeId: "C21DGpyaav8" },
+    { date: "2025-12-27", type: "Triple Jump", youtubeId: "gDx-BIQVteA" },
+    { date: "2025-12-27", type: "Triple Jump", youtubeId: "" },
+ 
+    // TRIPLE JUMP — 2026-01-11
+    { date: "2026-01-11", type: "Triple Jump", youtubeId: "" },
+    { date: "2026-01-11", type: "Triple Jump", youtubeId: "" },
+ 
+    // TRIPLE JUMP — 2026-02-23
+    { date: "2026-02-23", type: "Triple Jump", youtubeId: "76Yc9XwThPU" },
+    { date: "2026-02-23", type: "Triple Jump", youtubeId: "HzVyQChEEjQ" },
+    { date: "2026-02-23", type: "Triple Jump", youtubeId: "CThUN91ROsg" },
+    { date: "2026-02-23", type: "Triple Jump", youtubeId: "C4dFWfbzsIk" },
+];
+ 
+let activeType = "All";
+let activeDate = "All";
+ 
+function formatDate(d) {
+    const [y, m, day] = d.split("-");
+    const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    return `${months[+m-1]} ${+day}, ${y}`;
+}
+ 
+function render() {
+    const list = document.getElementById("videoList");
+    list.innerHTML = "";
+ 
+    const filtered = videos.filter(v =>
+        (activeType === "All" || v.type === activeType) &&
+        (activeDate === "All" || v.date === activeDate)
+    );
+ 
+    const lj = filtered.filter(v => v.type === "Long Jump").length;
+    const tj = filtered.filter(v => v.type === "Triple Jump").length;
+    document.getElementById("countShown").textContent = filtered.length;
+    document.getElementById("countLJ").textContent = lj;
+    document.getElementById("countTJ").textContent = tj;
+ 
+    if (filtered.length === 0) {
+        list.innerHTML = `<div class="empty-state"><h3>No Videos Found</h3><p>Try adjusting the filters above.</p></div>`;
+        return;
+    }
+ 
+    filtered.forEach((v, i) => {
+        const slug = v.type.toLowerCase().replace(" ", "-");
+        const card = document.createElement("div");
+        card.className = `video-card ${slug}`;
+ 
+        const embedHtml = v.youtubeId
+            ? `<iframe src="https://www.youtube.com/embed/${v.youtubeId}" allowfullscreen loading="lazy"></iframe>`
+            : `<div class="no-video">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <polygon points="5 3 19 12 5 21 5 3"/>
+                </svg>
+                <span>Video coming soon</span>
+               </div>`;
+ 
+        card.innerHTML = `
+            <div class="video-embed">${embedHtml}</div>
+            <div class="video-meta">
+                <div class="video-info">
+                    <div class="video-type">
+                        <span class="type-dot"></span>${v.type}
+                    </div>
+                    <div class="video-date">${formatDate(v.date)}</div>
+                </div>
+                <div class="video-num">${String(i + 1).padStart(2, "0")}</div>
+            </div>
+        `;
+ 
+        list.appendChild(card);
+    });
+}
+ 
+// pill clicks
+document.getElementById("typeFilters").addEventListener("click", e => {
+    const btn = e.target.closest(".pill");
+    if (!btn) return;
+    document.querySelectorAll("#typeFilters .pill").forEach(p => p.classList.remove("active"));
+    btn.classList.add("active");
+    activeType = btn.dataset.type;
+    render();
+});
+ 
+document.getElementById("dateFilters").addEventListener("click", e => {
+    const btn = e.target.closest(".pill");
+    if (!btn) return;
+    document.querySelectorAll("#dateFilters .pill").forEach(p => p.classList.remove("active"));
+    btn.classList.add("active");
+    activeDate = btn.dataset.date;
+    render();
+});
+ 
+render();
+</script>
+</body>
+</html>
