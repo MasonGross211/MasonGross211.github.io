@@ -1,79 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YCSOT Long J & Tripple J Donation</title>
+    <title>Contact & Donations — Mason Gross</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg:        #0a0a0a;
+            --surface:   #141414;
+            --surface2:  #1e1e1e;
+            --border:    #2a2a2a;
+            --accent:    #e8ff00;
+            --accent2:   #ff6b00;
+            --text:      #f0f0f0;
+            --muted:     #666;
+            --radius:    10px;
+        }
+
         body {
-            background-color: #ad6acc;
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-        }
-
-        nav {
-            background-color: rgb(92, 1, 104);
-        }
-
-        a {
-            color: rgb(255, 255, 255)
-        }
-
-        article {
-            background-color: #60247c;
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            min-height: 100vh;
         }
 
         header {
-            background-color: #753394;
+            padding: 48px 40px 32px;
+            border-bottom: 1px solid var(--border);
         }
 
-        h2 {
-            background-color: #8235a5;
+        .header-label {
+            font-size: 11px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 6px;
         }
 
-        button {
-            background-color: #572a6b;
+        h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(56px, 8vw, 96px);
+            line-height: 0.9;
+            letter-spacing: 0.02em;
+            background: linear-gradient(135deg, #fff 40%, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        p {
-            color: white;
+        nav {
+            padding: 0 40px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            overflow-x: auto;
         }
 
-        h2 {
-            color: white;
+        nav a {
+            display: inline-block;
+            padding: 14px 20px;
+            font-size: 13px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.2s;
+            white-space: nowrap;
+            border-bottom: 2px solid transparent;
+        }
+
+        nav a:hover { color: var(--text); border-bottom-color: var(--accent); }
+        nav a.active { color: var(--text); border-bottom-color: var(--accent); }
+
+        .page-body {
+            padding: 48px 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            max-width: 900px;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            animation: fadeUp 0.3s ease both;
+        }
+
+        .card:nth-child(2) { animation-delay: 0.08s; }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .card-label {
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .card h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 32px;
+            letter-spacing: 0.04em;
+            color: var(--text);
+        }
+
+        .card p {
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        /* Cash App button */
+        .btn-cashapp {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 24px;
+            background: #00c244;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.18s, transform 0.18s;
+            align-self: flex-start;
+        }
+
+        .btn-cashapp:hover { background: #00a838; transform: translateY(-2px); }
+
+        .btn-cashapp svg { width: 18px; height: 18px; fill: #fff; }
+
+        /* Email row */
+        .email-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 14px;
+            transition: opacity 0.18s;
+        }
+
+        .email-link:hover { opacity: 0.75; }
+
+        .divider { height: 1px; background: var(--border); }
+
+        @media (max-width: 600px) {
+            header, nav, .page-body { padding-left: 20px; padding-right: 20px; }
         }
     </style>
 </head>
-
 <body>
-    <h1>Contact & Donations</h1>
-    <nav>
-        <button>
-            <a href="index.html">Home</a> |
-            <a href="about.html">About</a> |
-            <a href="Game/index.html" target="_blank" rel="noopener noreferrer">Game</a>|
-            <a href="social.html">Socals</a> |
-            <a href="contact.html">Contact & Donations</a>|
-            <a href="videos.html">Videos Gallery</a> |
-        </button>
-    </nav>
 
-    <article>
-        <h2>Support My Work</h2>
-        <p>If you like to support me, you can send a donation through Cash App</p>
+<header>
+    <div class="header-label">Athletics · Track &amp; Field</div>
+    <h1>Contact &amp;<br>Donations</h1>
+</header>
 
-        <a href="https://cash.app/$MasonGross211" target="_blank" rel="noopener noreferrer" style="
-  display:inline-block;
-  padding:10px 20px;
-  background-color:#00C244;
-  color:#ffffff;
-  text-decoration:none;
-  border-radius:6px;
-  font-family:Arial, sans-serif;
-  font-size:16px;
-  font-weight:bold;
-">
+<nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="Game/index.html" target="_blank" rel="noopener noreferrer">Game</a>
+    <a href="social.html">Socials</a>
+    <a href="contact.html" class="active">Contact &amp; Donations</a>
+    <a href="videogallery.html">Videos</a>
+</nav>
+
+<div class="page-body">
+
+    <!-- Donate card -->
+    <div class="card">
+        <div class="card-label">Support</div>
+        <h2>Buy Me In</h2>
+        <p>If you'd like to support my training and competition, donations through Cash App are appreciated — every bit helps cover entry fees, equipment, and travel.</p>
+
+        <a class="btn-cashapp" href="https://cash.app/$MasonGross211" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18.376 5.983C16.777 4.258 14.51 3.2 12 3.2 7.136 3.2 3.2 7.136 3.2 12c0 4.864 3.936 8.8 8.8 8.8 4.864 0 8.8-3.936 8.8-8.8 0-2.26-.87-4.32-2.294-5.858l-.13-.159zM12 19.2c-3.974 0-7.2-3.226-7.2-7.2S8.026 4.8 12 4.8s7.2 3.226 7.2 7.2-3.226 7.2-7.2 7.2zm1.08-7.68c-1.062-.285-1.44-.6-1.44-1.08 0-.548.507-.93 1.36-.93.9 0 1.226.432 1.254 1.068h1.108c-.032-1.044-.68-2.001-1.962-2.31V7.2h-1.5v1.047c-1.182.256-1.98 1.026-1.98 2.193 0 1.404 1.161 2.1 2.86 2.52 1.17.28 1.4.69 1.4 1.163 0 .333-.237.862-1.36.862-1.038 0-1.447-.465-1.5-1.068H9.21c.059 1.113.894 2.028 2.37 2.322V17.4h1.5v-1.14c1.19-.228 2.1-.92 2.1-2.18 0-1.744-1.49-2.344-2.1-2.76z"/>
+            </svg>
             Donate via Cash App
         </a>
-        <p>Email me if you have questions at 29MGross@live.ytech.edu</p>
-    </article>
+    </div>
+
+    <!-- Contact card -->
+    <div class="card">
+        <div class="card-label">Get In Touch</div>
+        <h2>Say Hello</h2>
+        <p>Have a question, want to collaborate, or just want to talk track? Reach out by email.</p>
+
+        <div class="divider"></div>
+
+        <a class="email-link" href="/cdn-cgi/l/email-protection#35070c7872475a464675595c43501b4c4150565d1b505140">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+            <span class="__cf_email__"

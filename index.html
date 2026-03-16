@@ -1,86 +1,383 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Long & Tripple jump website</title>
+    <title>Mason Gross — Track & Field</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg:        #0a0a0a;
+            --surface:   #141414;
+            --surface2:  #1e1e1e;
+            --border:    #2a2a2a;
+            --accent:    #e8ff00;
+            --accent2:   #ff6b00;
+            --text:      #f0f0f0;
+            --muted:     #666;
+            --radius:    10px;
+        }
+
         body {
-            background-color: #ad6acc;
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            min-height: 100vh;
         }
 
+        /* ── HEADER ── */
+        header.site-header {
+            padding: 48px 40px 32px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .header-label {
+            font-size: 11px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 6px;
+        }
+
+        h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(56px, 8vw, 96px);
+            line-height: 0.9;
+            letter-spacing: 0.02em;
+            background: linear-gradient(135deg, #fff 40%, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ── NAV ── */
         nav {
-            background-color: rgb(92, 1, 104);
+            padding: 0 40px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            gap: 0;
+            overflow-x: auto;
         }
 
-        a {
-            color: rgb(255, 255, 255)
+        nav a {
+            display: inline-block;
+            padding: 14px 20px;
+            font-size: 13px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.2s;
+            white-space: nowrap;
+            border-bottom: 2px solid transparent;
         }
 
-        article {
-            background-color: #60247c;
+        nav a:hover { color: var(--text); border-bottom-color: var(--accent); }
+        nav a.active { color: var(--text); border-bottom-color: var(--accent); }
+
+        /* ── HERO ── */
+        .hero {
+            padding: 64px 40px 48px;
+            border-bottom: 1px solid var(--border);
         }
 
-        header {
-            background-color: #753394;
+        .hero-eyebrow {
+            font-size: 11px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 16px;
         }
 
-        h3 {
-            background-color: #8235a5;
+        .hero h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(40px, 6vw, 72px);
+            line-height: 1;
+            letter-spacing: 0.03em;
+            color: var(--text);
+            margin-bottom: 16px;
         }
 
-        button {
-            background-color: #572a6b;
+        .hero h2 em {
+            color: var(--accent);
+            font-style: normal;
         }
-        p {
-            color: white;
+
+        .hero p {
+            max-width: 520px;
+            font-size: 15px;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        /* ── PR SECTION ── */
+        .section-title {
+            padding: 36px 40px 20px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 13px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--muted);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .pr-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 0;
+        }
+
+        .pr-card {
+            padding: 36px 40px;
+            border-bottom: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .pr-card:last-child { border-right: none; }
+
+        .pr-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .pr-event {
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+
+        .pr-mark {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(36px, 5vw, 52px);
+            line-height: 1;
+            letter-spacing: 0.02em;
+        }
+
+        .pr-card.lj .pr-mark { color: var(--accent); }
+        .pr-card.tj .pr-mark { color: var(--accent2); }
+
+        .pr-athlete {
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: 4px;
+        }
+
+        .pr-badge {
+            padding: 4px 10px;
+            border-radius: 99px;
+            font-size: 10px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .lj .pr-badge { background: rgba(232,255,0,0.1); color: var(--accent); border: 1px solid rgba(232,255,0,0.2); }
+        .tj .pr-badge { background: rgba(255,107,0,0.1); color: var(--accent2); border: 1px solid rgba(255,107,0,0.2); }
+
+        /* ── VIDEO IN PR CARD ── */
+        .pr-video {
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: #000;
+        }
+
+        .pr-video video {
+            width: 100%;
+            display: block;
+            max-height: 220px;
+            object-fit: cover;
+        }
+
+        .pr-video .yt-embed {
+            position: relative;
+            padding-top: 56.25%;
+        }
+
+        .pr-video .yt-embed iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* ── COMING SOON PLACEHOLDER ── */
+        .yt-coming-soon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 40px 20px;
+            background: var(--surface2);
+            color: var(--muted);
+            font-size: 13px;
+            border-radius: var(--radius);
+        }
+
+        /* ── DAV PR ── */
+        .dav-mark {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 28px;
+            color: var(--text);
+            margin-top: 16px;
+        }
+
+        .dav-label {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 2px;
+        }
+
+        /* ── CTA ── */
+        .cta-bar {
+            padding: 32px 40px;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border-radius: 6px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.18s;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary { background: var(--accent); color: #000; }
+        .btn-primary:hover { background: #d4eb00; }
+        .btn-secondary { background: transparent; color: var(--text); border: 1px solid var(--border); }
+        .btn-secondary:hover { border-color: #555; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 600px) {
+            header.site-header, nav, .hero, .pr-card, .cta-bar, .section-title {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            .pr-card { border-right: none; }
         }
     </style>
 </head>
-
 <body>
-    <h1>Home</h1>
-    <nav>
-        <button>
-            <a href="index.html">Home</a> |
-            <a href="about.html">About</a> |
-            <a href="Game/index.html" target="_blank" rel="noopener noreferrer">Game</a>|
-            <a href="social.html">Socals</a> |
-            <a href="contact.html">Contact & Donations</a>|
-            <a href="videos.html">Videos Gallery</a> |
-        </button>
-    </nav>
 
-    <article>
-        <header>
-            <p>Long Jump prs
-            <p>Mason Gross- 18ft 6.5in</p>
-            <video width="320" height="240" controls>
-                <source src="IMG_8144.MOV" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <p>Dav 17ft 6.5in</p>
-            <P></P>
-            </p>
-        </header>
-    </article>
-    <article>
+<header class="site-header">
+    <div>
+        <div class="header-label">Athletics · Track &amp; Field</div>
+        <h1>Mason<br>Gross</h1>
+    </div>
+</header>
 
+<nav>
+    <a href="index.html" class="active">Home</a>
+    <a href="about.html">About</a>
+    <a href="Game/index.html" target="_blank" rel="noopener noreferrer">Game</a>
+    <a href="social.html">Socials</a>
+    <a href="contact.html">Contact &amp; Donations</a>
+    <a href="videogallery.html">Videos</a>
+</nav>
 
-        <header>
-            <p>Tripple Jump prs
-            <p>Mason Gross- 36ft 1.5in</p>
-            <video width="320" height="240" controls>
-                <source src="2036750241325332000.mov" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <P></P>
-            </p>
-        </header>
-    </article>
+<div class="hero">
+    <div class="hero-eyebrow">Track &amp; Field Athlete</div>
+    <h2>Long Jump<br>&amp; <em>Triple Jump</em></h2>
+    <p>Personal records, training footage, and competition highlights. Follow the journey from practice to the pit.</p>
+</div>
+
+<div class="section-title">Personal Records</div>
+
+<div class="pr-grid">
+
+    <!-- LONG JUMP -->
+    <div class="pr-card lj">
+        <div class="pr-header">
+            <div>
+                <div class="pr-event">Long Jump</div>
+                <div class="pr-mark">18′ 6.5″</div>
+                <div class="pr-athlete">Mason Gross</div>
+            </div>
+            <span class="pr-badge">PR</span>
+        </div>
+
+        <div class="pr-video">
+            <div class="yt-embed">
+                <iframe src="https://www.youtube.com/embed/heZlXoxcTNs"
+                    allowfullscreen loading="lazy"></iframe>
+            </div>
+        </div>
+
+        <div>
+            <div class="dav-mark">17′ 6.5″</div>
+            <div class="dav-label">Dav — Personal Best</div>
+        </div>
+    </div>
+
+    <!-- TRIPLE JUMP -->
+    <div class="pr-card tj">
+        <div class="pr-header">
+            <div>
+                <div class="pr-event">Triple Jump</div>
+                <div class="pr-mark">36′ 1.5″</div>
+                <div class="pr-athlete">Mason Gross</div>
+            </div>
+            <span class="pr-badge">PR</span>
+        </div>
+
+        <!-- ====================================================
+             PASTE YOUR TRIPLE JUMP YOUTUBE ID BELOW when ready.
+             Replace  YOUR_VIDEO_ID  with the ID from your link.
+             e.g. if your link is youtube.com/shorts/abc123
+                  then YOUR_VIDEO_ID = abc123
+             ==================================================== -->
+        <div class="pr-video">
+            <!-- UNCOMMENT AND FILL IN once uploaded:
+            <div class="yt-embed">
+                <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+                    allowfullscreen loading="lazy"></iframe>
+            </div>
+            -->
+            <div class="yt-coming-soon">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <polygon points="5 3 19 12 5 21 5 3"/>
+                </svg>
+                <span>Video coming soon</span>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="cta-bar">
+    <a href="videogallery.html" class="btn btn-primary">Watch All Videos →</a>
+    <a href="social.html" class="btn btn-secondary">Follow on Socials</a>
+</div>
 
 </body>
-
 </html>
