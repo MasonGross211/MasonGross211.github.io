@@ -218,6 +218,20 @@
             border: none;
         }
  
+        /* ── COMING SOON PLACEHOLDER ── */
+        .yt-coming-soon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 40px 20px;
+            background: var(--surface2);
+            color: var(--muted);
+            font-size: 13px;
+            border-radius: var(--radius);
+        }
+ 
         /* ── DAV PR ── */
         .dav-mark {
             font-family: 'Bebas Neue', sans-serif;
@@ -313,11 +327,10 @@
         </div>
  
         <div class="pr-video">
-            <!-- Swap for a YouTube embed if you have the ID -->
-            <video controls>
-                <source src="IMG_8144.MOV" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+            <div class="yt-embed">
+                <iframe src="https://www.youtube.com/embed/heZlXoxcTNs"
+                    allowfullscreen loading="lazy"></iframe>
+            </div>
         </div>
  
         <div>
@@ -337,18 +350,32 @@
             <span class="pr-badge">PR</span>
         </div>
  
+        <!-- ====================================================
+             PASTE YOUR TRIPLE JUMP YOUTUBE ID BELOW when ready.
+             Replace  YOUR_VIDEO_ID  with the ID from your link.
+             e.g. if your link is youtube.com/shorts/abc123
+                  then YOUR_VIDEO_ID = abc123
+             ==================================================== -->
         <div class="pr-video">
-            <video controls>
-                <source src="2036750241325332000.mov" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+            <!-- UNCOMMENT AND FILL IN once uploaded:
+            <div class="yt-embed">
+                <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+                    allowfullscreen loading="lazy"></iframe>
+            </div>
+            -->
+            <div class="yt-coming-soon">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <polygon points="5 3 19 12 5 21 5 3"/>
+                </svg>
+                <span>Video coming soon</span>
+            </div>
         </div>
     </div>
  
 </div>
  
 <div class="cta-bar">
-    <a href="videos.html" class="btn btn-primary">Watch All Videos →</a>
+    <a href="videogallery.html" class="btn btn-primary">Watch All Videos →</a>
     <a href="social.html" class="btn btn-secondary">Follow on Socials</a>
 </div>
  

@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
- 
+
         :root {
             --bg:        #0a0a0a;
             --surface:   #141414;
@@ -20,19 +20,19 @@
             --muted:     #666;
             --radius:    10px;
         }
- 
+
         body {
             background: var(--bg);
             color: var(--text);
             font-family: 'DM Sans', sans-serif;
             min-height: 100vh;
         }
- 
+
         header {
             padding: 48px 40px 32px;
             border-bottom: 1px solid var(--border);
         }
- 
+
         .header-label {
             font-size: 11px;
             letter-spacing: 0.25em;
@@ -41,7 +41,7 @@
             font-weight: 500;
             margin-bottom: 6px;
         }
- 
+
         h1 {
             font-family: 'Bebas Neue', sans-serif;
             font-size: clamp(56px, 8vw, 96px);
@@ -52,14 +52,14 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
- 
+
         nav {
             padding: 0 40px;
             border-bottom: 1px solid var(--border);
             display: flex;
             overflow-x: auto;
         }
- 
+
         nav a {
             display: inline-block;
             padding: 14px 20px;
@@ -72,10 +72,10 @@
             white-space: nowrap;
             border-bottom: 2px solid transparent;
         }
- 
+
         nav a:hover { color: var(--text); border-bottom-color: var(--accent); }
         nav a.active { color: var(--text); border-bottom-color: var(--accent); }
- 
+
         /* ── BIO SECTION ── */
         .bio {
             padding: 52px 40px;
@@ -85,29 +85,29 @@
             align-items: start;
             border-bottom: 1px solid var(--border);
         }
- 
+
         .bio-text { display: flex; flex-direction: column; gap: 24px; }
- 
+
         .bio-text h2 {
             font-family: 'Bebas Neue', sans-serif;
             font-size: 40px;
             letter-spacing: 0.04em;
             color: var(--text);
         }
- 
+
         .bio-text p {
             font-size: 15px;
             color: var(--muted);
             line-height: 1.75;
         }
- 
+
         /* stat pills */
         .bio-stats {
             display: flex;
             gap: 12px;
             flex-wrap: wrap;
         }
- 
+
         .stat-pill {
             padding: 10px 18px;
             border-radius: 99px;
@@ -116,30 +116,30 @@
             flex-direction: column;
             gap: 2px;
         }
- 
+
         .stat-val {
             font-family: 'Bebas Neue', sans-serif;
             font-size: 22px;
             line-height: 1;
             color: var(--accent);
         }
- 
+
         .stat-val.orange { color: var(--accent2); }
- 
+
         .stat-lbl {
             font-size: 10px;
             letter-spacing: 0.15em;
             text-transform: uppercase;
             color: var(--muted);
         }
- 
+
         /* photo stack */
         .bio-photos {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
         }
- 
+
         .bio-photos img {
             width: 100%;
             border-radius: var(--radius);
@@ -148,12 +148,12 @@
             display: block;
             border: 1px solid var(--border);
         }
- 
+
         .bio-photos img:first-child {
             grid-column: 1 / -1;
             aspect-ratio: 16/9;
         }
- 
+
         /* ── LINKS SECTION ── */
         .links-section {
             padding: 40px;
@@ -161,7 +161,7 @@
             flex-direction: column;
             gap: 12px;
         }
- 
+
         .section-label {
             font-size: 11px;
             letter-spacing: 0.25em;
@@ -169,7 +169,7 @@
             color: var(--muted);
             margin-bottom: 8px;
         }
- 
+
         .link-card {
             background: var(--surface);
             border: 1px solid var(--border);
@@ -183,42 +183,42 @@
             transition: all 0.18s;
             animation: fadeUp 0.3s ease both;
         }
- 
+
         .link-card:nth-child(2) { animation-delay: 0.06s; }
         .link-card:nth-child(3) { animation-delay: 0.12s; }
         .link-card:nth-child(4) { animation-delay: 0.18s; }
- 
+
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(14px); }
             to   { opacity: 1; transform: translateY(0); }
         }
- 
+
         .link-card:hover {
             transform: translateY(-2px);
             border-color: #444;
         }
- 
+
         .link-card:hover .link-arrow { transform: translate(3px, -3px); }
- 
+
         .link-card-info { display: flex; flex-direction: column; gap: 4px; }
- 
+
         .link-card-title {
             font-size: 15px;
             font-weight: 500;
             color: var(--text);
         }
- 
+
         .link-card-sub {
             font-size: 12px;
             color: var(--muted);
         }
- 
+
         .link-arrow {
             font-size: 18px;
             color: var(--muted);
             transition: transform 0.18s;
         }
- 
+
         .link-badge {
             padding: 3px 10px;
             border-radius: 99px;
@@ -230,7 +230,7 @@
             color: var(--accent);
             border: 1px solid rgba(232,255,0,0.2);
         }
- 
+
         @media (max-width: 700px) {
             .bio {
                 grid-template-columns: 1fr;
@@ -243,12 +243,12 @@
     </style>
 </head>
 <body>
- 
+
 <header>
     <div class="header-label">Athletics · Track &amp; Field</div>
     <h1>About<br>Me</h1>
 </header>
- 
+
 <nav>
     <a href="index.html">Home</a>
     <a href="about.html" class="active">About</a>
@@ -257,12 +257,12 @@
     <a href="contact.html">Contact &amp; Donations</a>
     <a href="videogallery.html">Videos</a>
 </nav>
- 
+
 <div class="bio">
     <div class="bio-text">
         <h2>Long Jumper &amp; Triple Jumper</h2>
         <p>I compete in Long Jump and Triple Jump for York County School of Technology. Outside of track I'm into IT — I build computers and do independent research on tech.</p>
- 
+
         <div class="bio-stats">
             <div class="stat-pill">
                 <div class="stat-val">18′6.5″</div>
@@ -274,16 +274,16 @@
             </div>
         </div>
     </div>
- 
+
     <div class="bio-photos">
         <img src="IMG_6903.jpeg" alt="Mason Gross competing">
         <img src="IMG_0680.jpeg" alt="Mason Gross training">
     </div>
 </div>
- 
+
 <div class="links-section">
     <div class="section-label">Resources &amp; Links</div>
- 
+
     <a class="link-card" href="Spring Track Schedule 2026.pdf" target="_blank">
         <div class="link-card-info">
             <div class="link-card-title">Spring Track Schedule 2026</div>
@@ -294,7 +294,7 @@
             <span class="link-arrow">↗</span>
         </div>
     </a>
- 
+
     <a class="link-card" href="https://www.yorktechspartantrackandfield.com/student-athletes/all-time-records" target="_blank" rel="noopener noreferrer">
         <div class="link-card-info">
             <div class="link-card-title">School All-Time Records</div>
@@ -302,7 +302,7 @@
         </div>
         <span class="link-arrow">↗</span>
     </a>
- 
+
     <a class="link-card" href="https://sites.google.com/view/masongross211/home" target="_blank" rel="noopener noreferrer">
         <div class="link-card-info">
             <div class="link-card-title">IT Research</div>
@@ -311,7 +311,6 @@
         <span class="link-arrow">↗</span>
     </a>
 </div>
- 
+
 </body>
 </html>
- 

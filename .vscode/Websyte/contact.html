@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
- 
+
         :root {
             --bg:        #0a0a0a;
             --surface:   #141414;
@@ -20,19 +20,19 @@
             --muted:     #666;
             --radius:    10px;
         }
- 
+
         body {
             background: var(--bg);
             color: var(--text);
             font-family: 'DM Sans', sans-serif;
             min-height: 100vh;
         }
- 
+
         header {
             padding: 48px 40px 32px;
             border-bottom: 1px solid var(--border);
         }
- 
+
         .header-label {
             font-size: 11px;
             letter-spacing: 0.25em;
@@ -41,7 +41,7 @@
             font-weight: 500;
             margin-bottom: 6px;
         }
- 
+
         h1 {
             font-family: 'Bebas Neue', sans-serif;
             font-size: clamp(56px, 8vw, 96px);
@@ -52,14 +52,14 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
- 
+
         nav {
             padding: 0 40px;
             border-bottom: 1px solid var(--border);
             display: flex;
             overflow-x: auto;
         }
- 
+
         nav a {
             display: inline-block;
             padding: 14px 20px;
@@ -72,10 +72,10 @@
             white-space: nowrap;
             border-bottom: 2px solid transparent;
         }
- 
+
         nav a:hover { color: var(--text); border-bottom-color: var(--accent); }
         nav a.active { color: var(--text); border-bottom-color: var(--accent); }
- 
+
         .page-body {
             padding: 48px 40px;
             display: grid;
@@ -83,7 +83,7 @@
             gap: 24px;
             max-width: 900px;
         }
- 
+
         .card {
             background: var(--surface);
             border: 1px solid var(--border);
@@ -94,34 +94,34 @@
             gap: 20px;
             animation: fadeUp 0.3s ease both;
         }
- 
+
         .card:nth-child(2) { animation-delay: 0.08s; }
- 
+
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(16px); }
             to   { opacity: 1; transform: translateY(0); }
         }
- 
+
         .card-label {
             font-size: 11px;
             letter-spacing: 0.2em;
             text-transform: uppercase;
             color: var(--muted);
         }
- 
+
         .card h2 {
             font-family: 'Bebas Neue', sans-serif;
             font-size: 32px;
             letter-spacing: 0.04em;
             color: var(--text);
         }
- 
+
         .card p {
             font-size: 14px;
             color: var(--muted);
             line-height: 1.7;
         }
- 
+
         /* Cash App button */
         .btn-cashapp {
             display: inline-flex;
@@ -138,11 +138,11 @@
             transition: background 0.18s, transform 0.18s;
             align-self: flex-start;
         }
- 
+
         .btn-cashapp:hover { background: #00a838; transform: translateY(-2px); }
- 
+
         .btn-cashapp svg { width: 18px; height: 18px; fill: #fff; }
- 
+
         /* Email row */
         .email-link {
             display: inline-flex;
@@ -153,23 +153,23 @@
             font-size: 14px;
             transition: opacity 0.18s;
         }
- 
+
         .email-link:hover { opacity: 0.75; }
- 
+
         .divider { height: 1px; background: var(--border); }
- 
+
         @media (max-width: 600px) {
             header, nav, .page-body { padding-left: 20px; padding-right: 20px; }
         }
     </style>
 </head>
 <body>
- 
+
 <header>
     <div class="header-label">Athletics · Track &amp; Field</div>
     <h1>Contact &amp;<br>Donations</h1>
 </header>
- 
+
 <nav>
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
@@ -178,15 +178,15 @@
     <a href="contact.html" class="active">Contact &amp; Donations</a>
     <a href="videogallery.html">Videos</a>
 </nav>
- 
+
 <div class="page-body">
- 
+
     <!-- Donate card -->
     <div class="card">
         <div class="card-label">Support</div>
         <h2>Buy Me In</h2>
         <p>If you'd like to support my training and competition, donations through Cash App are appreciated — every bit helps cover entry fees, equipment, and travel.</p>
- 
+
         <a class="btn-cashapp" href="https://cash.app/$MasonGross211" target="_blank" rel="noopener noreferrer">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M18.376 5.983C16.777 4.258 14.51 3.2 12 3.2 7.136 3.2 3.2 7.136 3.2 12c0 4.864 3.936 8.8 8.8 8.8 4.864 0 8.8-3.936 8.8-8.8 0-2.26-.87-4.32-2.294-5.858l-.13-.159zM12 19.2c-3.974 0-7.2-3.226-7.2-7.2S8.026 4.8 12 4.8s7.2 3.226 7.2 7.2-3.226 7.2-7.2 7.2zm1.08-7.68c-1.062-.285-1.44-.6-1.44-1.08 0-.548.507-.93 1.36-.93.9 0 1.226.432 1.254 1.068h1.108c-.032-1.044-.68-2.001-1.962-2.31V7.2h-1.5v1.047c-1.182.256-1.98 1.026-1.98 2.193 0 1.404 1.161 2.1 2.86 2.52 1.17.28 1.4.69 1.4 1.163 0 .333-.237.862-1.36.862-1.038 0-1.447-.465-1.5-1.068H9.21c.059 1.113.894 2.028 2.37 2.322V17.4h1.5v-1.14c1.19-.228 2.1-.92 2.1-2.18 0-1.744-1.49-2.344-2.1-2.76z"/>
@@ -194,26 +194,18 @@
             Donate via Cash App
         </a>
     </div>
- 
+
     <!-- Contact card -->
     <div class="card">
         <div class="card-label">Get In Touch</div>
         <h2>Say Hello</h2>
         <p>Have a question, want to collaborate, or just want to talk track? Reach out by email.</p>
- 
+
         <div class="divider"></div>
- 
-        <a class="email-link" href="mailto:29MGross@live.ytech.edu">
+
+        <a class="email-link" href="/cdn-cgi/l/email-protection#35070c7872475a464675595c43501b4c4150565d1b505140">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="2" y="4" width="20" height="16" rx="2"/>
                 <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
             </svg>
-            29MGross@live.ytech.edu
-        </a>
-    </div>
- 
-</div>
- 
-</body>
-</html>
- 
+            <span class="__cf_email__"

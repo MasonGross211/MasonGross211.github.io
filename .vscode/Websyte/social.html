@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
- 
+
         :root {
             --bg:        #0a0a0a;
             --surface:   #141414;
@@ -20,20 +20,20 @@
             --muted:     #666;
             --radius:    10px;
         }
- 
+
         body {
             background: var(--bg);
             color: var(--text);
             font-family: 'DM Sans', sans-serif;
             min-height: 100vh;
         }
- 
+
         /* ── HEADER ── */
         header {
             padding: 48px 40px 32px;
             border-bottom: 1px solid var(--border);
         }
- 
+
         .header-label {
             font-size: 11px;
             letter-spacing: 0.25em;
@@ -42,7 +42,7 @@
             font-weight: 500;
             margin-bottom: 6px;
         }
- 
+
         h1 {
             font-family: 'Bebas Neue', sans-serif;
             font-size: clamp(56px, 8vw, 96px);
@@ -53,7 +53,7 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
- 
+
         /* ── NAV ── */
         nav {
             padding: 0 40px;
@@ -61,7 +61,7 @@
             display: flex;
             overflow-x: auto;
         }
- 
+
         nav a {
             display: inline-block;
             padding: 14px 20px;
@@ -74,23 +74,23 @@
             white-space: nowrap;
             border-bottom: 2px solid transparent;
         }
- 
+
         nav a:hover { color: var(--text); border-bottom-color: var(--accent); }
         nav a.active { color: var(--text); border-bottom-color: var(--accent); }
- 
+
         /* ── INTRO ── */
         .intro {
             padding: 48px 40px 36px;
             border-bottom: 1px solid var(--border);
         }
- 
+
         .intro p {
             font-size: 15px;
             color: var(--muted);
             max-width: 480px;
             line-height: 1.7;
         }
- 
+
         /* ── SOCIAL LINKS ── */
         .social-grid {
             padding: 40px;
@@ -98,7 +98,7 @@
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 16px;
         }
- 
+
         .social-card {
             background: var(--surface);
             border: 1px solid var(--border);
@@ -112,19 +112,19 @@
             transition: all 0.2s;
             animation: fadeUp 0.3s ease both;
         }
- 
+
         .social-card:hover {
             transform: translateY(-3px);
             border-color: #444;
         }
- 
+
         .social-card:hover .social-arrow { transform: translate(3px, -3px); }
- 
+
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(16px); }
             to   { opacity: 1; transform: translateY(0); }
         }
- 
+
         .social-icon {
             width: 52px;
             height: 52px;
@@ -134,15 +134,15 @@
             justify-content: center;
             flex-shrink: 0;
         }
- 
+
         .icon-instagram { background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); }
         .icon-youtube   { background: #ff0000; }
         .icon-tiktok    { background: #000; border: 1px solid #333; }
- 
+
         .social-icon svg { width: 24px; height: 24px; fill: #fff; }
- 
+
         .social-info { flex: 1; }
- 
+
         .social-platform {
             font-size: 11px;
             letter-spacing: 0.15em;
@@ -150,19 +150,19 @@
             color: var(--muted);
             margin-bottom: 4px;
         }
- 
+
         .social-handle {
             font-size: 16px;
             font-weight: 500;
             color: var(--text);
         }
- 
+
         .social-arrow {
             color: var(--muted);
             font-size: 20px;
             transition: transform 0.2s;
         }
- 
+
         @media (max-width: 600px) {
             header, nav, .intro, .social-grid { padding-left: 20px; padding-right: 20px; }
             .social-grid { grid-template-columns: 1fr; }
@@ -170,12 +170,12 @@
     </style>
 </head>
 <body>
- 
+
 <header>
     <div class="header-label">Athletics · Track &amp; Field</div>
     <h1>Socials</h1>
 </header>
- 
+
 <nav>
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
@@ -184,13 +184,13 @@
     <a href="contact.html">Contact &amp; Donations</a>
     <a href="videogallery.html">Videos</a>
 </nav>
- 
+
 <div class="intro">
     <p>Follow along for training clips, competition highlights, and behind-the-scenes content.</p>
 </div>
- 
+
 <div class="social-grid">
- 
+
     <!-- Instagram -->
     <a class="social-card" href="https://www.instagram.com/mason._.gross?igsh=c2phNmkzbm1wdzMz&utm_source=qr" target="_blank" rel="noopener noreferrer">
         <div class="social-icon icon-instagram">
@@ -204,7 +204,7 @@
         </div>
         <div class="social-arrow">↗</div>
     </a>
- 
+
     <!-- YouTube — add your channel URL below -->
     <a class="social-card" href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" style="animation-delay:0.06s">
         <div class="social-icon icon-youtube">
@@ -218,9 +218,8 @@
         </div>
         <div class="social-arrow">↗</div>
     </a>
- 
+
 </div>
- 
+
 </body>
 </html>
- 
