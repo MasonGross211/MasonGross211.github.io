@@ -1,24 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About — Mason Gross</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet">
     <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
         :root {
-            --bg:        #0a0a0a;
-            --surface:   #141414;
-            --surface2:  #1e1e1e;
-            --border:    #2a2a2a;
-            --accent:    #e8ff00;
-            --accent2:   #ff6b00;
-            --text:      #f0f0f0;
-            --muted:     #666;
-            --radius:    10px;
+            --bg: #0a0a0a;
+            --surface: #141414;
+            --surface2: #1e1e1e;
+            --border: #2a2a2a;
+            --accent: #e8ff00;
+            --accent2: #ff6b00;
+            --text: #f0f0f0;
+            --muted: #666;
+            --radius: 10px;
         }
 
         body {
@@ -73,8 +81,15 @@
             border-bottom: 2px solid transparent;
         }
 
-        nav a:hover { color: var(--text); border-bottom-color: var(--accent); }
-        nav a.active { color: var(--text); border-bottom-color: var(--accent); }
+        nav a:hover {
+            color: var(--text);
+            border-bottom-color: var(--accent);
+        }
+
+        nav a.active {
+            color: var(--text);
+            border-bottom-color: var(--accent);
+        }
 
         /* ── BIO SECTION ── */
         .bio {
@@ -86,7 +101,11 @@
             border-bottom: 1px solid var(--border);
         }
 
-        .bio-text { display: flex; flex-direction: column; gap: 24px; }
+        .bio-text {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
 
         .bio-text h2 {
             font-family: 'Bebas Neue', sans-serif;
@@ -124,7 +143,9 @@
             color: var(--accent);
         }
 
-        .stat-val.orange { color: var(--accent2); }
+        .stat-val.orange {
+            color: var(--accent2);
+        }
 
         .stat-lbl {
             font-size: 10px;
@@ -184,13 +205,28 @@
             animation: fadeUp 0.3s ease both;
         }
 
-        .link-card:nth-child(2) { animation-delay: 0.06s; }
-        .link-card:nth-child(3) { animation-delay: 0.12s; }
-        .link-card:nth-child(4) { animation-delay: 0.18s; }
+        .link-card:nth-child(2) {
+            animation-delay: 0.06s;
+        }
+
+        .link-card:nth-child(3) {
+            animation-delay: 0.12s;
+        }
+
+        .link-card:nth-child(4) {
+            animation-delay: 0.18s;
+        }
 
         @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(14px); }
-            to   { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(14px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .link-card:hover {
@@ -198,9 +234,15 @@
             border-color: #444;
         }
 
-        .link-card:hover .link-arrow { transform: translate(3px, -3px); }
+        .link-card:hover .link-arrow {
+            transform: translate(3px, -3px);
+        }
 
-        .link-card-info { display: flex; flex-direction: column; gap: 4px; }
+        .link-card-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
 
         .link-card-title {
             font-size: 15px;
@@ -226,9 +268,9 @@
             letter-spacing: 0.12em;
             text-transform: uppercase;
             font-weight: 500;
-            background: rgba(232,255,0,0.1);
+            background: rgba(232, 255, 0, 0.1);
             color: var(--accent);
-            border: 1px solid rgba(232,255,0,0.2);
+            border: 1px solid rgba(232, 255, 0, 0.2);
         }
 
         @media (max-width: 700px) {
@@ -238,79 +280,101 @@
                 padding-left: 20px;
                 padding-right: 20px;
             }
-            header, nav, .links-section { padding-left: 20px; padding-right: 20px; }
+
+            header,
+            nav,
+            .links-section {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
         }
     </style>
 </head>
+
 <body>
 
-<header>
-    <div class="header-label">Athletics · Track &amp; Field</div>
-    <h1>About<br>Me</h1>
-</header>
+    <header>
+        <div class="header-label">Athletics · Track &amp; Field</div>
+        <h1>About<br>Me</h1>
+    </header>
 
-<nav>
-    <a href="index.html">Home</a>
-    <a href="about.html" class="active">About</a>
-    <a href="Game/index.html" target="_blank" rel="noopener noreferrer">Game</a>
-    <a href="social.html">Socials</a>
-    <a href="contact.html">Contact &amp; Donations</a>
-    <a href="videogallery.html">Videos</a>
-</nav>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html" class="active">About</a>
+        <a href="Game/index.html" target="_blank" rel="noopener noreferrer">Game</a>
+        <a href="social.html">Socials</a>
+        <a href="contact.html">Contact &amp; Donations</a>
+        <a href="videogallery.html">Videos</a>
+    </nav>
 
-<div class="bio">
-    <div class="bio-text">
-        <h2>Long Jumper &amp; Triple Jumper</h2>
-        <p>I compete in Long Jump and Triple Jump for York County School of Technology. Outside of track I'm into IT — I build computers and do independent research on tech.</p>
+    <div class="bio">
+        <div class="bio-text">
+            <h2>Long Jumper &amp; Triple Jumper</h2>
+            <p>I compete in Long Jump and Triple Jump for York County School of Technology. Outside of track I'm into IT
+                — I build computers and do independent research on tech.</p>
 
-        <div class="bio-stats">
-            <div class="stat-pill">
-                <div class="stat-val">18′6.5″</div>
-                <div class="stat-lbl">Long Jump PR</div>
+            <div class="bio-stats">
+                <div class="stat-pill">
+                    <div class="stat-val">18′6.5″</div>
+                    <div class="stat-lbl">Long Jump PR</div>
+                </div>
+                <div class="stat-pill">
+                    <div class="stat-val orange">36′1.5″</div>
+                    <div class="stat-lbl">Triple Jump PR</div>
+                </div>
             </div>
-            <div class="stat-pill">
-                <div class="stat-val orange">36′1.5″</div>
-                <div class="stat-lbl">Triple Jump PR</div>
-            </div>
+        </div>
+
+        <div class="bio-photos">
+            <img src="IMG_6903.jpeg" alt="Mason Gross competing">
+            <img src="IMG_0680.jpeg" alt="Mason Gross training">
         </div>
     </div>
 
-    <div class="bio-photos">
-        <img src="IMG_6903.jpeg" alt="Mason Gross competing">
-        <img src="IMG_0680.jpeg" alt="Mason Gross training">
-    </div>
-</div>
+    <div class="links-section">
+        <div class="section-label">Resources &amp; Links</div>
 
-<div class="links-section">
-    <div class="section-label">Resources &amp; Links</div>
+        <a class="link-card" href="Spring Track Schedule 2026.pdf" target="_blank">
+            <div class="link-card-info">
+                <div class="link-card-title">Spring Track Schedule 2026</div>
+                <div class="link-card-sub">Competition calendar — PDF</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;">
+                <span class="link-badge">PDF</span>
+                <span class="link-arrow">↗</span>
+            </div>
+        </a>
 
-    <a class="link-card" href="Spring Track Schedule 2026.pdf" target="_blank">
-        <div class="link-card-info">
-            <div class="link-card-title">Spring Track Schedule 2026</div>
-            <div class="link-card-sub">Competition calendar — PDF</div>
-        </div>
-        <div style="display:flex;align-items:center;gap:12px;">
-            <span class="link-badge">PDF</span>
+        <a class="link-card" href="Track Meet Order of Events.pdf" target="_blank">
+            <div class="link-card-info">
+                <div class="link-card-title">Spring Track Schedule 2026</div>
+                <div class="link-card-sub">Competition calendar — PDF</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;">
+                <span class="link-badge">PDF</span>
+                <span class="link-arrow">↗</span>
+            </div>
+        </a>
+
+        <a class="link-card" href="https://www.yorktechspartantrackandfield.com/student-athletes/all-time-records"
+            target="_blank" rel="noopener noreferrer">
+            <div class="link-card-info">
+                <div class="link-card-title">School All-Time Records</div>
+                <div class="link-card-sub">York Tech Spartan Track &amp; Field</div>
+            </div>
             <span class="link-arrow">↗</span>
-        </div>
-    </a>
+        </a>
 
-    <a class="link-card" href="https://www.yorktechspartantrackandfield.com/student-athletes/all-time-records" target="_blank" rel="noopener noreferrer">
-        <div class="link-card-info">
-            <div class="link-card-title">School All-Time Records</div>
-            <div class="link-card-sub">York Tech Spartan Track &amp; Field</div>
-        </div>
-        <span class="link-arrow">↗</span>
-    </a>
-
-    <a class="link-card" href="https://sites.google.com/yssd.org/mnasongross211/home" target="_blank" rel="noopener noreferrer">
-        <div class="link-card-info">
-            <div class="link-card-title">IT Research</div>
-            <div class="link-card-sub">Independent technology research &amp; projects</div>
-        </div>
-        <span class="link-arrow">↗</span>
-    </a>
-</div>
+        <a class="link-card" href="https://sites.google.com/yssd.org/mnasongross211/home" target="_blank"
+            rel="noopener noreferrer">
+            <div class="link-card-info">
+                <div class="link-card-title">IT Research</div>
+                <div class="link-card-sub">Independent technology research &amp; projects</div>
+            </div>
+            <span class="link-arrow">↗</span>
+        </a>
+    </div>
 
 </body>
+
 </html>
