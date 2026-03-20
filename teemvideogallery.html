@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Gallery — Mason Gross</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg:        #0a0a0a;
+            --surface:   #141414;
+            --surface2:  #1e1e1e;
+            --border:    #2a2a2a;
+            --accent:    #e8ff00;
+            --accent2:   #ff6b00;
+            --text:      #f0f0f0;
+            --muted:     #666;
+            --radius:    10px;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            min-height: 100vh;
+        }
+
+        /* ── HEADER ── */
+        header {
+            padding: 48px 40px 32px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-label {
+            font-size: 11px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 6px;
+        }
+
+        h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(56px, 8vw, 96px);
+            line-height: 0.9;
+            letter-spacing: 0.02em;
+            background: linear-gradient(135deg, #fff 40%, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ── NAV ── */
+        nav {
+            padding: 0 40px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            overflow-x: auto;
+        }
+
+        nav a {
+            display: inline-block;
+            padding: 14px 20px;
+            font-size: 13px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.2s;
+            white-space: nowrap;
+            border-bottom: 2px solid transparent;
+        }
+
+        nav a:hover { color: var(--text); border-bottom-color: var(--accent); }
+        nav a.active { color: var(--text); border-bottom-color: var(--accent); }
+
+        /* ── FILTERS ── */
+        .filters {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .filter-row {
+            padding: 16px 40px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .filter-row:last-child { border-bottom: none; }
+
+        .filter-label {
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--muted);
+            min-width: 64px;
+            flex-shrink: 0;
+        }
+
+        .pill-group {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .pill {
+            padding: 6px 14px;
+            border-radius: 99px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--muted);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.18s;
+            white-space: nowrap;
+        }
+
+        .pill:hover { border-color: #555; color: var(--text); }
+        .pill.active { background: var(--accent); border-color: var(--accent); color: #000; font-weight: 500; }
+        .pill.active.athlete { background: #7c3aed; border-color: #7c3aed; color: #fff; }
+
+        /* ── SORT + STATS ROW ── */
+        .meta-bar {
+            padding: 12px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            border-bottom: 1px solid var(--border);
+            flex-wrap: wrap;
+        }
+
+        .stats {
+            display: flex;
+            gap: 24px;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .stats span { color: var(--text); font-weight: 500; }
+
+        .sort-select {
+            padding: 6px 12px;
+            border-radius: 6px;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        /* ── VIDEO GRID ── */
+        #videoList {
+            padding: 36px 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 24px;
+        }
+
+        .video-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: transform 0.2s, border-color 0.2s;
+            animation: fadeUp 0.25s ease both;
+        }
+
+        .video-card:hover { transform: translateY(-3px); border-color: #444; }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(14px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 16:9 embed wrapper */
+        .video-embed {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            background: #000;
+        }
+
+        .video-embed iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-embed .no-video {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--surface2);
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .no-video svg { opacity: 0.25; }
+
+        /* ── CARD META ── */
+        .video-meta {
+            padding: 14px 16px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .card-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .card-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 3px 10px;
+            border-radius: 99px;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            border: 1px solid transparent;
+        }
+
+        .tag-dot { width: 6px; height: 6px; border-radius: 50%; }
+
+        .tag-lj { background: rgba(232,255,0,0.08); color: var(--accent); border-color: rgba(232,255,0,0.2); }
+        .tag-lj .tag-dot { background: var(--accent); }
+        .tag-tj { background: rgba(255,107,0,0.08); color: var(--accent2); border-color: rgba(255,107,0,0.2); }
+        .tag-tj .tag-dot { background: var(--accent2); }
+        .tag-athlete { background: rgba(124,58,237,0.1); color: #a78bfa; border-color: rgba(124,58,237,0.25); }
+        .tag-comp { background: rgba(255,255,255,0.05); color: var(--muted); border-color: var(--border); }
+
+        .card-num {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 28px;
+            color: var(--border);
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .card-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .card-date {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .card-distance {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 22px;
+            color: var(--text);
+            letter-spacing: 0.03em;
+        }
+
+        /* ── EMPTY STATE ── */
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 80px 20px;
+            color: var(--muted);
+        }
+
+        .empty-state h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 40px;
+            color: var(--surface2);
+            margin-bottom: 8px;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 640px) {
+            header, nav, .filter-row, .meta-bar, #videoList {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            #videoList { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-label">Athletics · Track &amp; Field</div>
+    <h1>Video<br>Gallery</h1>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="Game/index.html" target="_blank" rel="noopener noreferrer">Game</a>
+    <a href="social.html">Socials</a>
+    <a href="contact.html">Contact &amp; Donations</a>
+    <a href="videogallery.html" class="active">Videos</a>
+    <a href="teemvideogallery.html">Teem Videos</a>
+</nav>
+
+<div class="filters">
+    <!-- EVENT filter -->
+    <div class="filter-row">
+        <span class="filter-label">Event</span>
+        <div class="pill-group" id="typeFilters">
+            <button class="pill active" data-type="All">All</button>
+            <button class="pill" data-type="Long Jump">Long Jump</button>
+            <button class="pill" data-type="Triple Jump">Triple Jump</button>
+        </div>
+    </div>
+
+    <!-- DATE filter -->
+    <div class="filter-row">
+        <span class="filter-label">Date</span>
+        <div class="pill-group" id="dateFilters">
+            <button class="pill active" data-date="All">All</button>
+            <button class="pill" data-date="2025-04-03">Apr 3 '25</button>
+            <button class="pill" data-date="2025-04-04">Apr 4 '25</button>
+            <button class="pill" data-date="2025-04-10">Apr 10 '25</button>
+            <button class="pill" data-date="2025-04-22">Apr 22 '25</button>
+            <button class="pill" data-date="2025-04-28">Apr 28 '25</button>
+            <button class="pill" data-date="2025-06-09">Jun 9 '25</button>
+            <button class="pill" data-date="2025-12-06">Dec 6 '25</button>
+            <button class="pill" data-date="2025-12-27">Dec 27 '25</button>
+            <button class="pill" data-date="2026-01-11">Jan 11 '26</button>
+            <button class="pill" data-date="2026-02-12">Feb 12 '26</button>
+            <button class="pill" data-date="2026-02-23">Feb 23 '26</button>
+        </div>
+    </div>
+
+    <!-- ATHLETE filter — built dynamically from data -->
+    <div class="filter-row">
+        <span class="filter-label">Athlete</span>
+        <div class="pill-group" id="athleteFilters">
+            <button class="pill active" data-athlete="All">All</button>
+            <!-- populated by JS -->
+        </div>
+    </div>
+</div>
+
+<div class="meta-bar">
+    <div class="stats">
+        <div>Showing <span id="countShown">—</span></div>
+        <div>LJ: <span id="countLJ">—</span></div>
+        <div>TJ: <span id="countTJ">—</span></div>
+    </div>
+    <select class="sort-select" id="sortOrder">
+        <option value="newest">Newest first</option>
+        <option value="oldest">Oldest first</option>
+    </select>
+</div>
+
+<div id="videoList"></div>
+
+<script>
+/*
+=======================================================
+  HOW TO ADD / EDIT VIDEOS
+=======================================================
+Each video entry has these fields:
+
+  date        — "YYYY-MM-DD"
+  type        — "Long Jump" or "Triple Jump"
+  athlete     — person's name, e.g. "Mason Gross"
+                leave as "" if unknown
+  competition — meet/event name, e.g. "YCSOT Indoor"
+                leave as "" if a practice
+  distance    — mark jumped, e.g. "18′ 6.5″"
+                leave as "" if unknown
+  youtubeId   — just the ID from the YouTube URL
+                e.g. youtube.com/shorts/abc123 → "abc123"
+                leave as "" if not uploaded yet
+=======================================================
+*/
+const videos = [
+    // ── LONG JUMP ─────────────────────────────────
+
+    // 2025-04-03
+    { date: "2025-04-03", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "Tl-v6GCHcZw" },
+    { date: "2025-04-03", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "JoS8KKtMVRU" },
+    { date: "2025-04-03", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "b0vOoX2yAns" },
+    { date: "2025-04-03", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "Q-rl47exs0Q" },
+    { date: "2025-04-03", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "ezoobr9yydU" },
+
+    // 2025-04-04
+    { date: "2025-04-04", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "dEq4uxFwoJs" },
+    { date: "2025-04-04", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "ZBt8JmfD-Jg" },
+    { date: "2025-04-04", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "jBJG6qneLAo" },
+
+    // 2025-04-10
+    { date: "2025-04-10", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "BJ0aQ-zUSDc" },
+    { date: "2025-04-10", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "qauQuHpat7Q" },
+    { date: "2025-04-10", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "8hb3rTx8kVs" },
+
+    // 2025-04-22
+    { date: "2025-04-22", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "HZKaNSho5R0" },
+    { date: "2025-04-22", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "_50p8Zu3-Kc" },
+    { date: "2025-04-22", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "SK1h6OmK6M0" },
+
+    // 2025-04-28
+    { date: "2025-04-28", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "riJgMa1h7m4" },
+    { date: "2025-04-28", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "wSCJmoDl-kk" },
+    { date: "2025-04-28", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "AKHQ90rjawA" },
+
+    // 2025-12-06
+    { date: "2025-12-06", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "18′ 6.5″", youtubeId: "heZlXoxcTNs" },
+    { date: "2025-12-06", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "gnV2QCX7KBE" },
+    { date: "2025-12-06", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "tx37PJoVi6I" },
+
+    // 2025-12-27
+    { date: "2025-12-27", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "xW3aLkQmLfo" },
+    { date: "2025-12-27", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "I4vmuqLUhhw" },
+    { date: "2025-12-27", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "9pBN_KAHA18" },
+
+    // 2026-01-11
+    { date: "2026-01-11", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "2hlysjQxqrg" },
+    { date: "2026-01-11", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "0RPsP_LZL6k" },
+    { date: "2026-01-11", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "Duu2QCRKijs" },
+
+    // 2026-02-12
+    { date: "2026-02-12", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "acfHdPkQYnQ" },
+    { date: "2026-02-12", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "i_EE5uGMFT4" },
+    { date: "2026-02-12", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "_8P7ocEHWvw" },
+
+    // ── TRIPLE JUMP ───────────────────────────────
+
+    // 2025-06-09
+    { date: "2025-06-09", type: "Triple Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "VztoezXNUPg" },
+    { date: "2025-06-09", type: "Triple Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "O0QO6o1oAfM" },
+    { date: "2025-06-09", type: "Triple Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "CoQKeg762yw" },
+    { date: "2025-06-09", type: "Triple Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "7OBQLrE8cy8" },
+
+    // 2025-12-06
+    { date: "2025-12-06", type: "Triple Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "XM2h00rUjfA" },
+    { date: "2025-12-06", type: "Triple Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "3OUoRNUG6Qg" },
+    { date: "2025-12-06", type: "Triple Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "SCqVCYOPNJE" },
+
+    // 2025-12-27
+    { date: "2025-12-27", type: "Triple Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "C21DGpyaav8" },
+    { date: "2025-12-27", type: "Triple Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "gDx-BIQVteA" },
+    { date: "2025-12-27", type: "Triple Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "7OOgmT4hXkk" },
+
+    // 2026-01-11
+    { date: "2026-01-11", type: "Triple Jump", athlete: "Mason Gross", competition: "", distance: "36′ 1.5″", youtubeId: "6jRpwhyHavM" },
+    { date: "2026-01-11", type: "Triple Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "WNAZ5CmonC8" },
+
+    // 2026-02-23
+    { date: "2026-02-23", type: "Triple Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "76Yc9XwThPU" },
+    { date: "2026-02-23", type: "Triple Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "HzVyQChEEjQ" },
+    { date: "2026-02-23", type: "Triple Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "CThUN91ROsg" },
+    { date: "2026-02-23", type: "Triple Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "C4dFWfbzsIk" },
+
+    // 2026-03-19
+    { date: "2026-03-19", type: "Triple Jump", athlete: "Halley", competition: "", distance: "27′ 1″", youtubeId: "YaIbcYmjLJk" },
+    { date: "2026-03-19", type: "Triple Jump", athlete: "Aaliyah", competition: "", distance: "33", youtubeId: "mqFrSbgRYqQ" },
+    { date: "2026-03-19", type: "Triple Jump", athlete: "Halley", competition: "", distance: "27′ 11″", youtubeId: "Ib1U9F4Lwjs?feature=share" },
+    { date: "2026-03-19", type: "Triple Jump", athlete: "Halley", competition: "", distance: "28′ 3″", youtubeId: "BWYn9ghRQEw?feature=share" },
+];
+
+// ── STATE ──────────────────────────────────────────
+let activeType    = "All";
+let activeDate    = "All";
+let activeAthlete = "All";
+let sortOrder     = "newest";
+
+// ── BUILD ATHLETE PILLS DYNAMICALLY ───────────────
+function buildAthleteFilters() {
+    const names = [...new Set(videos.map(v => v.athlete).filter(Boolean))].sort();
+    const group = document.getElementById("athleteFilters");
+    names.forEach(name => {
+        const btn = document.createElement("button");
+        btn.className = "pill";
+        btn.dataset.athlete = name;
+        btn.textContent = name;
+        group.appendChild(btn);
+    });
+}
+
+// ── HELPERS ───────────────────────────────────────
+function formatDate(d) {
+    const [y, m, day] = d.split("-");
+    const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    return `${months[+m-1]} ${+day}, ${y}`;
+}
+
+function cleanId(id) {
+    // strip ?feature=share or any query string
+    return id ? id.split("?")[0] : "";
+}
+
+// ── UPDATE DATE PILLS based on current type + athlete ─
+function updateDatePills() {
+    // which dates have videos matching the current type & athlete filters?
+    const validDates = new Set(
+        videos
+            .filter(v =>
+                (activeType    === "All" || v.type    === activeType) &&
+                (activeAthlete === "All" || v.athlete === activeAthlete)
+            )
+            .map(v => v.date)
+    );
+
+    document.querySelectorAll("#dateFilters .pill").forEach(btn => {
+        const d = btn.dataset.date;
+        if (d === "All") return; // always show All
+        const hide = !validDates.has(d);
+        btn.style.display = hide ? "none" : "";
+        // if currently selected date is now hidden, reset to All
+        if (hide && activeDate === d) {
+            activeDate = "All";
+            document.querySelectorAll("#dateFilters .pill").forEach(p => p.classList.remove("active"));
+            document.querySelector("#dateFilters .pill[data-date='All']").classList.add("active");
+        }
+    });
+}
+
+// ── RENDER ────────────────────────────────────────
+function render() {
+    const list = document.getElementById("videoList");
+    list.innerHTML = "";
+
+    updateDatePills();
+
+    let filtered = videos.filter(v =>
+        (activeType    === "All" || v.type    === activeType) &&
+        (activeDate    === "All" || v.date    === activeDate) &&
+        (activeAthlete === "All" || v.athlete === activeAthlete)
+    );
+
+    filtered.sort((a, b) => sortOrder === "newest"
+        ? new Date(b.date) - new Date(a.date)
+        : new Date(a.date) - new Date(b.date)
+    );
+
+    document.getElementById("countShown").textContent = filtered.length;
+    document.getElementById("countLJ").textContent = filtered.filter(v => v.type === "Long Jump").length;
+    document.getElementById("countTJ").textContent = filtered.filter(v => v.type === "Triple Jump").length;
+
+    if (filtered.length === 0) {
+        list.innerHTML = `<div class="empty-state"><h3>No Videos Found</h3><p>Try adjusting the filters above.</p></div>`;
+        return;
+    }
+
+    filtered.forEach((v, i) => {
+        const isLJ  = v.type === "Long Jump";
+        const id    = cleanId(v.youtubeId);
+        const card  = document.createElement("div");
+        card.className = "video-card";
+        card.style.animationDelay = `${Math.min(i, 8) * 0.04}s`;
+
+        const embedHtml = id
+            ? `<iframe src="https://www.youtube.com/embed/${id}" allowfullscreen loading="lazy"></iframe>`
+            : `<div class="no-video">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <polygon points="5 3 19 12 5 21 5 3"/>
+                </svg>
+                <span>Coming soon</span>
+               </div>`;
+
+        const typeTag = isLJ
+            ? `<span class="tag tag-lj"><span class="tag-dot"></span>Long Jump</span>`
+            : `<span class="tag tag-tj"><span class="tag-dot"></span>Triple Jump</span>`;
+
+        const athleteTag = v.athlete
+            ? `<span class="tag tag-athlete">${v.athlete}</span>` : "";
+
+        const compTag = v.competition
+            ? `<span class="tag tag-comp">${v.competition}</span>` : "";
+
+        card.innerHTML = `
+            <div class="video-embed">${embedHtml}</div>
+            <div class="video-meta">
+                <div class="card-top">
+                    <div class="card-tags">${typeTag}${athleteTag}${compTag}</div>
+                    <div class="card-num">${String(i + 1).padStart(2, "0")}</div>
+                </div>
+                <div class="card-bottom">
+                    <div class="card-date">${formatDate(v.date)}</div>
+                    ${v.distance ? `<div class="card-distance">${v.distance}</div>` : ""}
+                </div>
+            </div>`;
+
+        list.appendChild(card);
+    });
+}
+
+// ── FILTER CLICKS ─────────────────────────────────
+function bindPills(containerId, stateKey) {
+    document.getElementById(containerId).addEventListener("click", e => {
+        const btn = e.target.closest(".pill");
+        if (!btn) return;
+        document.querySelectorAll(`#${containerId} .pill`).forEach(p => p.classList.remove("active"));
+        btn.classList.add("active");
+        if (stateKey === "type")    activeType    = btn.dataset.type;
+        if (stateKey === "date")    activeDate    = btn.dataset.date;
+        if (stateKey === "athlete") activeAthlete = btn.dataset.athlete;
+        render();
+    });
+}
+
+bindPills("typeFilters",    "type");
+bindPills("dateFilters",    "date");
+bindPills("athleteFilters", "athlete");
+
+document.getElementById("sortOrder").addEventListener("change", e => {
+    sortOrder = e.target.value;
+    render();
+});
+
+// ── INIT ──────────────────────────────────────────
+buildAthleteFilters();
+render();
+</script>
+</body>
+</html>
