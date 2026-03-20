@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Gallery — Mason Gross</title>
+    <title>Team Videos — Mason Gross</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
@@ -308,7 +308,7 @@
 
 <header>
     <div class="header-label">Athletics · Track &amp; Field</div>
-    <h1>Video<br>Gallery</h1>
+    <h1>Team<br>Videos</h1>
 </header>
 
 <nav>
@@ -317,8 +317,8 @@
     <a href="Game/index.html" target="_blank" rel="noopener noreferrer">Game</a>
     <a href="social.html">Socials</a>
     <a href="contact.html">Contact &amp; Donations</a>
-    <a href="videogallery.html" class="active">Videos</a>
-    <a href="teemvideogallery.html">Teem Videos</a>
+    <a href="videogallery.html">Videos</a>
+    <a href="teemvideogallery.html" class="active">Team Videos</a>
 </nav>
 
 <div class="filters">
@@ -337,17 +337,7 @@
         <span class="filter-label">Date</span>
         <div class="pill-group" id="dateFilters">
             <button class="pill active" data-date="All">All</button>
-            <button class="pill" data-date="2025-04-03">Apr 3 '25</button>
-            <button class="pill" data-date="2025-04-04">Apr 4 '25</button>
-            <button class="pill" data-date="2025-04-10">Apr 10 '25</button>
-            <button class="pill" data-date="2025-04-22">Apr 22 '25</button>
-            <button class="pill" data-date="2025-04-28">Apr 28 '25</button>
-            <button class="pill" data-date="2025-06-09">Jun 9 '25</button>
-            <button class="pill" data-date="2025-12-06">Dec 6 '25</button>
-            <button class="pill" data-date="2025-12-27">Dec 27 '25</button>
-            <button class="pill" data-date="2026-01-11">Jan 11 '26</button>
-            <button class="pill" data-date="2026-02-12">Feb 12 '26</button>
-            <button class="pill" data-date="2026-02-23">Feb 23 '26</button>
+            <button class="pill" data-date="2026-03-19">Mar 19 '26</button>
         </div>
     </div>
 
@@ -384,7 +374,7 @@ Each video entry has these fields:
 
   date        — "YYYY-MM-DD"
   type        — "Long Jump" or "Triple Jump"
-  athlete     — person's name, e.g. "Mason Gross"
+  athlete     — person's name, e.g. "Halley"
                 leave as "" if unknown
   competition — meet/event name, e.g. "YCSOT Indoor"
                 leave as "" if a practice
@@ -393,91 +383,16 @@ Each video entry has these fields:
   youtubeId   — just the ID from the YouTube URL
                 e.g. youtube.com/shorts/abc123 → "abc123"
                 leave as "" if not uploaded yet
+
+  Also add a date pill in the HTML above when adding a new date!
 =======================================================
 */
 const videos = [
-    // ── LONG JUMP ─────────────────────────────────
-
-    // 2025-04-03
-    { date: "2025-04-03", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "Tl-v6GCHcZw" },
-    { date: "2025-04-03", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "JoS8KKtMVRU" },
-    { date: "2025-04-03", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "b0vOoX2yAns" },
-    { date: "2025-04-03", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "Q-rl47exs0Q" },
-    { date: "2025-04-03", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "ezoobr9yydU" },
-
-    // 2025-04-04
-    { date: "2025-04-04", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "dEq4uxFwoJs" },
-    { date: "2025-04-04", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "ZBt8JmfD-Jg" },
-    { date: "2025-04-04", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "jBJG6qneLAo" },
-
-    // 2025-04-10
-    { date: "2025-04-10", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "BJ0aQ-zUSDc" },
-    { date: "2025-04-10", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "qauQuHpat7Q" },
-    { date: "2025-04-10", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "8hb3rTx8kVs" },
-
-    // 2025-04-22
-    { date: "2025-04-22", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "HZKaNSho5R0" },
-    { date: "2025-04-22", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "_50p8Zu3-Kc" },
-    { date: "2025-04-22", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "SK1h6OmK6M0" },
-
-    // 2025-04-28
-    { date: "2025-04-28", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "riJgMa1h7m4" },
-    { date: "2025-04-28", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "wSCJmoDl-kk" },
-    { date: "2025-04-28", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "AKHQ90rjawA" },
-
-    // 2025-12-06
-    { date: "2025-12-06", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "18′ 6.5″", youtubeId: "heZlXoxcTNs" },
-    { date: "2025-12-06", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "gnV2QCX7KBE" },
-    { date: "2025-12-06", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "tx37PJoVi6I" },
-
-    // 2025-12-27
-    { date: "2025-12-27", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "xW3aLkQmLfo" },
-    { date: "2025-12-27", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "I4vmuqLUhhw" },
-    { date: "2025-12-27", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "9pBN_KAHA18" },
-
-    // 2026-01-11
-    { date: "2026-01-11", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "2hlysjQxqrg" },
-    { date: "2026-01-11", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "0RPsP_LZL6k" },
-    { date: "2026-01-11", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "Duu2QCRKijs" },
-
-    // 2026-02-12
-    { date: "2026-02-12", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "acfHdPkQYnQ" },
-    { date: "2026-02-12", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "i_EE5uGMFT4" },
-    { date: "2026-02-12", type: "Long Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "_8P7ocEHWvw" },
-
-    // ── TRIPLE JUMP ───────────────────────────────
-
-    // 2025-06-09
-    { date: "2025-06-09", type: "Triple Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "VztoezXNUPg" },
-    { date: "2025-06-09", type: "Triple Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "O0QO6o1oAfM" },
-    { date: "2025-06-09", type: "Triple Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "CoQKeg762yw" },
-    { date: "2025-06-09", type: "Triple Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "7OBQLrE8cy8" },
-
-    // 2025-12-06
-    { date: "2025-12-06", type: "Triple Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "XM2h00rUjfA" },
-    { date: "2025-12-06", type: "Triple Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "3OUoRNUG6Qg" },
-    { date: "2025-12-06", type: "Triple Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "SCqVCYOPNJE" },
-
-    // 2025-12-27
-    { date: "2025-12-27", type: "Triple Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "C21DGpyaav8" },
-    { date: "2025-12-27", type: "Triple Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "gDx-BIQVteA" },
-    { date: "2025-12-27", type: "Triple Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "7OOgmT4hXkk" },
-
-    // 2026-01-11
-    { date: "2026-01-11", type: "Triple Jump", athlete: "Mason Gross", competition: "", distance: "36′ 1.5″", youtubeId: "6jRpwhyHavM" },
-    { date: "2026-01-11", type: "Triple Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "WNAZ5CmonC8" },
-
-    // 2026-02-23
-    { date: "2026-02-23", type: "Triple Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "76Yc9XwThPU" },
-    { date: "2026-02-23", type: "Triple Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "HzVyQChEEjQ" },
-    { date: "2026-02-23", type: "Triple Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "CThUN91ROsg" },
-    { date: "2026-02-23", type: "Triple Jump", athlete: "Mason Gross", competition: "", distance: "", youtubeId: "C4dFWfbzsIk" },
-
     // 2026-03-19
-    { date: "2026-03-19", type: "Triple Jump", athlete: "Halley", competition: "", distance: "27′ 1″", youtubeId: "YaIbcYmjLJk" },
-    { date: "2026-03-19", type: "Triple Jump", athlete: "Aaliyah", competition: "", distance: "33", youtubeId: "mqFrSbgRYqQ" },
-    { date: "2026-03-19", type: "Triple Jump", athlete: "Halley", competition: "", distance: "27′ 11″", youtubeId: "Ib1U9F4Lwjs?feature=share" },
-    { date: "2026-03-19", type: "Triple Jump", athlete: "Halley", competition: "", distance: "28′ 3″", youtubeId: "BWYn9ghRQEw?feature=share" },
+    { date: "2026-03-19", type: "Triple Jump", athlete: "Halley",  competition: "", distance: "27′ 1″",  youtubeId: "YaIbcYmjLJk" },
+    { date: "2026-03-19", type: "Triple Jump", athlete: "Aaliyah", competition: "", distance: "33′",     youtubeId: "mqFrSbgRYqQ" },
+    { date: "2026-03-19", type: "Triple Jump", athlete: "Halley",  competition: "", distance: "27′ 11″", youtubeId: "Ib1U9F4Lwjs" },
+    { date: "2026-03-19", type: "Triple Jump", athlete: "Halley",  competition: "", distance: "28′ 3″",  youtubeId: "BWYn9ghRQEw" },
 ];
 
 // ── STATE ──────────────────────────────────────────
@@ -507,13 +422,11 @@ function formatDate(d) {
 }
 
 function cleanId(id) {
-    // strip ?feature=share or any query string
     return id ? id.split("?")[0] : "";
 }
 
 // ── UPDATE DATE PILLS based on current type + athlete ─
 function updateDatePills() {
-    // which dates have videos matching the current type & athlete filters?
     const validDates = new Set(
         videos
             .filter(v =>
@@ -525,10 +438,9 @@ function updateDatePills() {
 
     document.querySelectorAll("#dateFilters .pill").forEach(btn => {
         const d = btn.dataset.date;
-        if (d === "All") return; // always show All
+        if (d === "All") return;
         const hide = !validDates.has(d);
         btn.style.display = hide ? "none" : "";
-        // if currently selected date is now hidden, reset to All
         if (hide && activeDate === d) {
             activeDate = "All";
             document.querySelectorAll("#dateFilters .pill").forEach(p => p.classList.remove("active"));
